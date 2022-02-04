@@ -35,6 +35,8 @@ public class SpawnCoin : MonoBehaviour
             {
                 positionY = Random.Range(0, PatternManager.instance.pattern_Position.Length);
 
+                Debug.Log("Check : Spawn_Coin");
+
                 pos = Camera.main.WorldToViewportPoint(pos);
                 pos.y = PatternManager.instance.pattern_Position[positionY];
                 pos = Camera.main.ViewportToWorldPoint(pos);
