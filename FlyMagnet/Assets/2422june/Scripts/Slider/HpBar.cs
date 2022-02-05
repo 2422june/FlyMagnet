@@ -31,13 +31,6 @@ public class HpBar : MonoBehaviour
         mySlider.value = InGameManager.i.P_Hp;
     }
 
-    /*private void Update()
-    {
-        Vector3 pos = Player.transform.position;
-        pos.y += 60;
-        transform.position = Camera.main.WorldToScreenPoint(pos);
-    }*/
-
     public void SetHp()
     {
         mySlider.value = InGameManager.i.P_Hp;
