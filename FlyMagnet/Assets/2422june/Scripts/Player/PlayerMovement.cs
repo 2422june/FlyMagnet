@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Sprite N, S, NS;
 
+    float yVelocity = 2;
+
     public static PlayerMovement i;
 
     private void Awake()
@@ -74,6 +76,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // PC 전용 중성 버튼
+        if (Input.GetKey(KeyCode.Space))
+            electricCharge = 0;
+
         if (e_PowerN != 0 || e_PowerS != 0)
             electricCharge = e_PowerN + e_PowerS; //now Player Magnetism
 
@@ -99,41 +105,49 @@ public class PlayerMovement : MonoBehaviour
 
         if (checkPower == 1)
         {
-            if (transform.position.y < 330)
-            {
-                transform.Translate(0, speed * Time.deltaTime, 0);
-            }
-            else
-            {
-                transform.position = new Vector3(transform.position.x, 330, 0);
-            }
+            float positionY = Mathf.SmoothDamp(transform.position.y, 260, ref yVelocity, 0.6f);
+            transform.position = new Vector3(transform.position.x, positionY, 0);
+
+            //if (transform.position.y < 260)
+            //{
+            //    transform.Translate(0, speed * Time.deltaTime, 0);
+            //}
+            //else
+            //{
+            //    transform.position = new Vector3(transform.position.x, 260, 0);
+            //}
         }
         else if (checkPower == -1)
         {
-            if (transform.position.y > -330)
-            {
-                transform.Translate(0, -1 * speed * Time.deltaTime, 0);
-            }
-            else
-            {
-                transform.position = new Vector3(transform.position.x, -330, 0);
-            }
+            float positionY = Mathf.SmoothDamp(transform.position.y, -260, ref yVelocity, 0.6f);
+            transform.position = new Vector3(transform.position.x, positionY, 0);
+
+            //if (transform.position.y > -260)
+            //{
+            //    transform.Translate(0, -1 * speed * Time.deltaTime, 0);
+            //}
+            //else
+            //{
+            //    transform.position = new Vector3(transform.position.x, -260, 0);
+            //}
         }
         else if (checkPower == 0)
         {
+            float positionY = Mathf.SmoothDamp(transform.position.y, 0, ref yVelocity, 0.4f);
+            transform.position = new Vector3(transform.position.x, positionY, 0);
 
-            if (transform.position.y < -0.5f)
-            {
-                transform.Translate(0, speed * Time.deltaTime, 0);
-            }
-            else if (transform.position.y > 0.5f)
-            {
-                transform.Translate(0, -1 * speed * Time.deltaTime, 0);
-            }
-            else
-            {
-                transform.position = new Vector3(transform.position.x, 0, 0);
-            }
+            //if (transform.position.y < -0.5f)
+            //{
+            //    transform.Translate(0, 1 * speed * Time.deltaTime, 0);
+            //}
+            //else if (transform.position.y > 0.5f)
+            //{
+            //    transform.Translate(0, -1 * speed * Time.deltaTime, 0);
+            //}
+            //else
+            //{
+            //    transform.position = new Vector3(transform.position.x, 0, 0);
+            //}
         }
 
 
